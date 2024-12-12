@@ -1,0 +1,37 @@
+backButton.Click.Add(fun _ ->
+    if currentIndex > 0 then
+        // Update current index to the previous question
+        currentIndex <- currentIndex - 1
+
+        // Check if the question exists
+        if questions.ContainsKey(currentIndex) then
+            let question = questions.[currentIndex]
+
+            // Check if the question was answered
+            if userAnswers.ContainsKey(currentIndex) then
+                let userAnswer = userAnswers.[currentIndex]
+
+                // Adjust score based on the correctness of the answer
+                match question.QuestionType with
+                | "MultipleChoice" ->
+                    if userAnswer = question.CorrectAnswer then
+                        score <- score - question.Score
+
+                | "Written" ->
+                    if userAnswer.ToLower() = question.CorrectAnswer.ToLower() then
+                        score <- score - question.Score
+
+                | _ -> ()
+
+                // Ensure the score remains non-negative
+                if score < 0 then
+                    score <- 0
+
+                // Update the score display
+                updateScoreDisplay ()
+
+                // Mark the question as unanswered to allow recalculation
+                answeredQuestions <- answeredQuestions.Remove(currentIndex)
+
+            // Display the previous question
+            displayQuestion currentIndex)
