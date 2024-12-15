@@ -39,7 +39,7 @@ let createQuizForm (userInfo: UserInfo) (questions: Map<int, Question>) =
     let mutable currentIndex = 0
     let mutable score = 0
 
-    
+    let numberOfQuestions = questions.Count
     let mutable answeredQuestions = Map.empty<int, bool>
 
    
@@ -54,7 +54,7 @@ let createQuizForm (userInfo: UserInfo) (questions: Map<int, Question>) =
     let scoreLabel = new Label(Location = Point(20, 270), AutoSize = true, Font = new Font("Arial", 12.0f))
     let progressBar = new ProgressBar(Location=Point(20,300), BackColor = Color.White , Size = Size(300, 30))
     let timer = new Timer(Interval = 1000) 
-    let Qnum = new Label(Text = $"{currentIndex+1}\11",Location = Point(180, 20), AutoSize = true, Font = new Font("Arial", 15.0f, FontStyle.Bold), ForeColor = Color.DarkGoldenrod)
+    let Qnum = new Label(Text = $"{currentIndex+1}\{numberOfQuestions}",Location = Point(180, 20), AutoSize = true, Font = new Font("Arial", 15.0f, FontStyle.Bold), ForeColor = Color.DarkGoldenrod)
     let mutable remainingTime = 3 * 60 
 
     timer.Tick.Add(fun _ ->
