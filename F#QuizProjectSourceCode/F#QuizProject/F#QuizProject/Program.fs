@@ -131,7 +131,7 @@ let createQuizForm (userInfo: UserInfo) (questions: Map<int, Question>) =
 
         answerTextBox.Clear()
         currentIndex <- currentIndex + 1
-        Qnum.Text <- $"{currentIndex+1}\11"
+        Qnum.Text <- $"{currentIndex+1}\{numberOfQuestions}"
 
         if questions.ContainsKey(currentIndex) then
             displayQuestion currentIndex
@@ -149,7 +149,7 @@ let createQuizForm (userInfo: UserInfo) (questions: Map<int, Question>) =
 
         
         currentIndex <- currentIndex - 1
-        Qnum.Text <- $"{currentIndex+1}\11"
+        Qnum.Text <- $"{currentIndex+1}\{numberOfQuestions}"
 
         
         if questions.ContainsKey(currentIndex) then
